@@ -17,7 +17,9 @@
     
 
 ## 학습 내용
-- 
+- [CodingKey 내용 정리](https://github.com/Kyxxn/TIL/blob/main/CodingKey.md)
+    - CodingKey가 뭔지
+    - CodingKey가 왜 동작하는지
 
 
 ## 참조링크
