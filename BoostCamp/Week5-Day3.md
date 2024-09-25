@@ -1,10 +1,11 @@
 ## 오늘 내가 시도해본 것들
 - Clean Architecture 아키텍처에 Combine을 적용해서 반응형으로 개발을 하려하고 있다.
-    1. 뷰가 변경되면 ViewModel이 UseCase를 호출하고, UseCase는 Repository를 호출한다.
-    2. Repository가 API 요청을 하여 issues를 받아내면, 그 결과가 성공했을 경우 AnyPublisher<[IssueEntity], Never>의 첫 번째 IssueEntity로 들어가고, 실패한 경우 Never로 처리 된다.
-    3. UseCase는 동일하게 Repository의 리턴값 AnyPublisher<[IssueEntity], Never>을 반환하여 ViewModel은 이 결과를 통해 사용하게 된다.
-    4. ViewModel이 사용할 때는 .assign을 통해 어떤 클래스의 프로퍼티를 등록할 지를 정한다. 또한, ViewModel이 사라졌을 때 메모리 누수 방지를 위해 store에도 저장한다.
-    5. ViewController는 ViewModel의 $issues를 구독하고 있다가, sink 즉 변화가 생기면 해당 변화된 정보를 얻어서 로직을 처리한다. 컨트롤러 또한 store를 사용하여 메모리 누수를 막는다.
+    1. 뷰가 변경되면 ViewModel이 UseCase를 호출하고, UseCase는 Repository를 호출하고, Repository는 Service를 호출한다.
+    2. Service가 API 요청을 하여 DTO를 통해 디코딩하면, 그 결과가 성공했을 경우 `AnyPublisher<[IssueDTO], Never>`의 첫 번째 IssueEntity로 들어가고, 실패한 경우 Never로 처리 된다.
+    3. Repository는 Service의 결과를 토대로 UseCase에서 Domain Model (= Entity)에 맞게끔 변환하여 리턴을 해준다. 여기서는 성공할 경우 `AnyPublisher<[IssueEntity], Never>`을 반환한다.
+    4. UseCase는 동일하게 Repository의 리턴값 `AnyPublisher<[IssueEntity], Never>`을 반환하여 ViewModel은 이 결과를 통해 사용하게 된다.
+    5. ViewModel이 사용할 때는 .assign을 통해 어떤 클래스의 프로퍼티를 등록할 지를 정한다. 또한, ViewModel이 사라졌을 때 메모리 누수 방지를 위해 store에도 저장한다.
+    6. ViewController는 ViewModel의 $issues를 구독하고 있다가, sink 즉 변화가 생기면 해당 변화된 정보를 얻어서 로직을 처리한다. 컨트롤러 또한 store를 사용하여 메모리 누수를 막는다.
 
 - 왜 Combine을 사용했는가 ?
     - Combine, Concurrency, RxSwift, Delegate, NotificationCenter, Closure.. 등등
