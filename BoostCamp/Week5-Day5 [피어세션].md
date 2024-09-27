@@ -9,6 +9,8 @@
 - 우리가 평소에 고민하던 내용과 같다. (참조, 상속 ..)
 - 용범님: `DataSource`(= 나의 Service) 계층에서 BaseDataSource를 갖고 있기 때문에 상속을 위해 class로 구현했고, 나머지는 참조 방식이 필요없어서 struct로 구현
 
+<br>
+
 ## Network 계층 추상화
 - `EndPoint`들도 `EndPointType`과 같이 추상화하여 네트워크 작업할 때 DIP를 적용하여 문제해결 가능
 - [네트워크 계층에서 EndPointType 추상타입 정의](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/blob/S074/IssueManager/NetworkKit/NetworkKit/EndPointType.swift)
@@ -26,7 +28,8 @@
 ## Repository와 Service 계층
 > 클린 아키텍처에서 Data 계층과 Service 계층을 분리하였다.
 
-사진
+<img width="719" alt="스크린샷 2024-09-27 오후 1 42 52" src="https://github.com/user-attachments/assets/371b49c2-5772-4aec-9c23-310ec6ebf3db">
+
 
 - 어제까지의 나는 `Data - Repository`, `Data - Service`와 같이 Data 계층에 같이 존재한다고 생각했다.
     - [멘토님의 피드백](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/pull/120#pullrequestreview-2331094737)
@@ -43,7 +46,7 @@
 
 ## DIContainer 적용 이유
 - 의존성 주입을 담당하는 컨테이너로, 싱글톤 패턴으로 주로 사용된다.
-- `SceneDelegate`와 같은 곳에서 아래와 같이 특정 의존성을 미리 주입해둔다. [아래 코드 링크](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/blob/S005/IssueTracker/IssueTracker/App/Sources/SceneDelegate.swift)
+- `SceneDelegate`와 같은 곳에서 아래와 같이 특정 의존성을 미리 주입해둔다. [DIContainer 링크](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/blob/S005/IssueTracker/IssueTracker/Modules/UtilityModule/DI/DIContainer/DIContainer.swift)
     ``` swift
     extension SceneDelegate {
         func registerDependency(){
@@ -85,7 +88,7 @@
 ## 프레임워크 추가로 모듈화 구현하기
 > 앞전에 창우님이 설명해주신 것과 유사하나, 그 때와 달리 `New Project`를 사용
 
-사진
+<img width="500" alt="스크린샷 2024-09-27 오후 1 21 29" src="https://github.com/user-attachments/assets/4cb811b2-5dce-4290-a66d-bb2632d68b7c">
 
 - `New Project` - `Framework & Library`에서 `Framework`를 선택한다.
     - 참고로 Static Library는 리소스 파일들(image, assets, nibs, strings file)을 포함할수가 없음 [레퍼런스 링크](https://medium.com/delightroom/ios-library-framework-swift-package-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90-%EC%B0%A8%EC%9D%B4%EC%A0%90-1f42c7848771)
@@ -113,6 +116,7 @@ DispatchQueue 클로저에서는 사용하지 않았다.
 - A. 각 클로저마다 캡처가 동작하므로, `[weak self]`를 붙여줘야 함
 안 붙여도 되는 경우가 있긴 한데, 붙여야 할 경우에 `[weak self]`를 안 쓰면 문제가 생기니 웬만하면 붙이는 것을 추천.
 
+<br>
 
 ## 레퍼런스
 - [Static Library 정리](https://medium.com/delightroom/ios-library-framework-swift-package-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90-%EC%B0%A8%EC%9D%B4%EC%A0%90-1f42c7848771)
