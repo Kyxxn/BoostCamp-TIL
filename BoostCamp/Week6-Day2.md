@@ -4,7 +4,9 @@
 
 > 지난 번에 Repository와 Service를 하나의 레이어로 묶어서 정의해두었다는 멘토님 피드백을 받고 아래와 같이 나누어보았습니다 ! 
 
-사진
+<img width="716" alt="스크린샷 2024-10-01 오후 1 49 49" src="https://github.com/user-attachments/assets/32685744-e719-45a4-9284-b4c0f6e54ffc">
+
+[사진 출처: JK 블로그](https://medium.com/@jungkim/%EB%B2%84%ED%84%B0%ED%94%8C%EB%9D%BC%EC%9D%B4-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EB%A5%BC-%EC%86%8C%EA%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4-9d4abd71c3c1)
 
 ### Network - Service 
 - 네트워크 API를 요청하는 부분
@@ -21,7 +23,9 @@
 - service가 DTO를 반환하면 `Domain`에 맞게끔 `Entity`로 변환하는 작업을 거친다.
 
 
-멘토님이 말씀하신 대로 잘 나누었는지 궁금합니다!
+<br>
+
+멘토님께서 말씀하신 대로 잘 나누었는지 궁금합니다!
 
 <br>
 
@@ -41,6 +45,8 @@
     ```
 - 컨트롤러에서 새로운 화면으로 전환하고자 할 때마다 이렇게 긴 코드를 작성한다는 관점,
 그리고 컨트롤러가 의존성을 주입해준다는 관점에서 DIContainer의 필요성을 느꼈습니다.
+
+<br>
 
 ### 내가 DIContainer를 사용하는 방법
 - `SceneDelegate`에서 아래와 같이 DIContainer에 미리 의존성을 주입해둡니다.
@@ -74,6 +80,8 @@
     }
     ```
 
+<br>
+
 ### DIContainer 활용법 질문
 - 현재 제 코드는 init( ~~ ) 생성자의 프로퍼티에서 디폴트 값으로 모두 채워두었습니다.
     - 따라서 제 코드는 재사용성 & 의존성 주입을 담당하긴 하지만,
@@ -82,8 +90,12 @@
 - 저는 DIContainer의 장점이 `의존성 주입을 담당`한다는 것 외에도,
 동일한 한 화면을 여러 화면에서 띄운다면 재사용성의 장점도 있다고 생각합니다.
     - e.g. 쇼핑 앱의 장바구니..?
-    - 제 코드의 DIContainer는 `의존성 주입`과 `재사용성`은 지원하지만, 유지보수가 좋은 코드가 아니라 생각되는데
-    위 상황에서 멘토님의 의견이 궁금합니다 !
+
+<br>
+
+제 코드의 DIContainer는 `의존성 주입`과 `재사용성`은 지원하지만, 유지보수가 좋은 코드가 아니라 생각되는데
+
+위 상황에서 멘토님의 의견이 궁금합니다 !
 
 <br>
 
@@ -102,7 +114,7 @@
             else { return UITableViewCell()}
 
             let user = viewModel.assignees[indexPath.row]
-            cell.configure(user: user)
+            cell.configure(user: user) // 해당 코드 부분
             return cell
         }
     }
