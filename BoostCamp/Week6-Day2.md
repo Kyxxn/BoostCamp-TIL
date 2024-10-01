@@ -1,8 +1,10 @@
-# 멘토 코드리뷰 반영
+# 멘토 코드리뷰
 ## 클린 아키텍처 구조 및 역할
-> 클린 아키텍처 적용이 본 프로젝트가 처음입니다.
+> 클린 아키텍처 적용이 본 프로젝트가 처음입니다. [지난 멘토님 코멘트 링크](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/pull/120#pullrequestreview-2331094737)
 
-> 지난 번에 Repository와 Service를 하나의 레이어로 묶어서 정의해두었다는 멘토님 피드백을 받고 아래와 같이 나누어보았습니다 ! [멘토님 코멘트 링크](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/pull/120#pullrequestreview-2331094737)
+> 지난 번에 Repository와 Service를 하나의 레이어로 묶어서 정의해두었다는 멘토님 피드백을 받고 아래와 같이 나누어보았습니다 ! 
+
+사진
 
 ### Network - Service 
 - 네트워크 API를 요청하는 부분
@@ -18,14 +20,17 @@
     - `let storage: IssueStorage`: 로컬 DB 및 더미 데이터 받아오기
 - service가 DTO를 반환하면 `Domain`에 맞게끔 `Entity`로 변환하는 작업을 거친다.
 
+
+멘토님이 말씀하신 대로 잘 나누었는지 궁금합니다!
+
 <br>
 
 ## DIContainer 적용
 > DIContainer 적용이 본 프로젝트가 처음입니다.
 
 ### 도입하려고 하는 이유
-- 새로운 화면으로 전환하고자 할 때,
-Service 계층부터 ViewModel까지 다 의존성을 주입하고 컨트롤러를 생성해야 했습니다.
+- **새로운 화면으로 전환**하고자 할 때,
+    Service 계층부터 ViewModel까지 다 의존성을 주입하고 컨트롤러를 생성해야 했습니다.
     ``` swift
     let issueService = IssueService()
     let issueRepository = IssuesRepository(service: issueService)
@@ -71,7 +76,9 @@ Service 계층부터 ViewModel까지 다 의존성을 주입하고 컨트롤러�
 
 ### DIContainer 활용법 질문
 - 현재 제 코드는 init( ~~ ) 생성자의 프로퍼티에서 디폴트 값으로 모두 채워두었습니다.
-    - 따라서 제 코드는 재사용성 & 의존성 주입을 담당하긴 하지만 수작업으로 `OOO UseCase`는 `OOO Repository`를 쓸 거야. `ㅁㅁㅁ UseCase`는 `ㅁㅁㅁ Repository`를 쓸거야 라고 단정지어두 느낌이라 확장성이나 유지보수가 좋은 코드는 아니라 생각합니다.
+    - 따라서 제 코드는 재사용성 & 의존성 주입을 담당하긴 하지만,
+    수작업으로 `OOO UseCase`는 `OOO Repository`를 쓸 거야. `ㅁㅁㅁ UseCase`는 `ㅁㅁㅁ Repository`를 쓸거야 라고 단정지어둔 느낌이라 확장성이나 유지보수가 좋은 코드는 아니라 생각합니다.
+
 - 저는 DIContainer의 장점이 `의존성 주입을 담당`한다는 것 외에도,
 동일한 한 화면을 여러 화면에서 띄운다면 재사용성의 장점도 있다고 생각합니다.
     - e.g. 쇼핑 앱의 장바구니..?
@@ -113,11 +120,12 @@ cell이 user를 받게 되면 `avatarURL`을 갖고 UIImage로 변환을 해야 
 
 ### 내가 떠올린 해결방안
 - cell은 보여지는 `View`인데, URL을 통해 이미지를 받아오는 작업을 한다는 것은 아키텍처 구조상 맞지 않다고 생각했습니다.
-- 제가 떠올린 방법으로 `ImageLoader`라는 싱글톤을 만들고 cell은 비동기로 url을 해당 싱글톤에 넘겨주면 그 결과를 토대로 Image를 보여주려 했습니다.
-- **그러나**, ImageLoader가 비동기로 이미지를 갖고 온다고 하지만, `import UIKit`을 해서 UIImage를 반환해야 하는게 맞나 ? 라고 생각했습니다.
-    - 위 해결책으로 ImageLoader가 `UIImage`를 반환하지 않고, `Data`를 반환하고 cell에서 해당 Data를 UIImage로 바꾸는 작업을 하면 `ImageLoader`가 UIKit을 의존하지 않아도 될 거라 생각했습니다.
+- **제가 떠올린 첫 번째 방법**으로 `ImageLoader`라는 싱글톤을 만들고 cell은 비동기로 url을 해당 싱글톤에 넘겨주면 그 결과를 토대로 Image를 보여주려 했습니다.
+    - **그러나**, ImageLoader가 비동기로 이미지를 갖고 온다고 하지만, `import UIKit`을 해서 UIImage를 반환해야 하는게 맞나 ? 라고 생각했습니다.
+
+- **두 번째 해결책**으로 ImageLoader가 `UIImage`를 반환하지 않고, `Data`를 반환하고 cell에서 해당 Data를 UIImage로 바꾸는 작업을 하면 `ImageLoader`가 UIKit을 의존하지 않아도 될 거라 생각했습니다.
     - 그런데 또.. Data로 받는데 1번, UIImage로 바꾸는데 1번, 총 2번의 이미지 처리를 해야하니 굉장히 비효율적일 것 같습니다!
 
 
 위 상황에 대해 여러가지 방안을 떠올려봤는데,
-멘토님의 견해가 궁금합니다..
+멘토님의 견해가 궁금합니다..!
