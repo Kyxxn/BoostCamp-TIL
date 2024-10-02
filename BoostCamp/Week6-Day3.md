@@ -31,7 +31,9 @@
             - `IssueCreator Coordinator`의 navigationController(SceneDelegate에서 넘어온 것) 프로퍼티에 present로 `IssueCreatorViewController`를 띄워준다.
 
 <br>
-``` mermaid
+
+``` mermaid 
+
 sequenceDiagram
     participant SceneDelegate
     participant AppCoordinator
@@ -56,4 +58,5 @@ sequenceDiagram
     IssueCreatorCoordinator->>IssueCreatorViewController: init()
     IssueCreatorCoordinator->>IssueCreatorViewController: set coordinator
     IssueCreatorCoordinator->>NavigationController: present IssueCreatorViewController modally
+    
 ```
