@@ -73,3 +73,35 @@ JSON의 스네이크 케이스(e.g. park_hyo_jun)와 다를 때 중첩 열거형
     ```
     keyNotFound(CodingKeys(stringValue: "naㅇe", intValue: nil), Swift.DecodingError.Context(codingPath: [_CodingKey(stringValue: "Index 0", intValue: 0), CodingKeys(stringValue: "labels", intValue: nil)
     ```
+
+
+## 10/02 추가
+### 상황
+``` swift
+오늘 프사 설정하는 과정에서 avatarURL이 전부 nil로 바뀌어 넘어오는 문제가 발생했다.
+JSONSerializer를 통해 서버로부터 잘 받아오는 것은 확인했으나
+DTO로 디코딩하는 과정에서 문제가 생겼다.
+```
+
+### 해결
+- JSONDecoder의 프로퍼티 `keyDecodingStrategy = convertFromSnakeCase`로 설정되어 있었던 것이다.
+    - 해당 프로퍼티는 위에서 말한 바와 같이 `park_hyo_jun`로 넘어오면 `parkHyoJun`으로 바꿔준다. (스네이크 케이스 -> 카멜 케이스)
+- 내 DTO는 그러면 avatarUrl로 되어 있어야 하는데 아래와 같이 되어 있었다.
+    - CodingKey가 설정되어 있음에도 keyDecodingStrategy에 의해 avatarUrl을 찾고 있었기 때문에 CoingKey가 맞다 않았다고 생각한다.
+    ``` swift
+    struct UserDTO: Decodable {
+        let id: Int
+        let login: String
+        let avatarURL: String
+
+        enum CodingKeys: String, CodingKey {
+            case login, id
+            case avatarURL = "avatar_url"
+        }
+    }
+    ```
+
+**오늘의 교훈**
+
+- CodingKey를 써도 `keyDecodingStrategy = convertFromSnakeCase`로 되어 있으면 프로퍼티가 더 중요하다.
+- 두 개를 같이 쓰지 말자, CodingKeys로 하거나 디코더의 `keyDecodingStrategy = convertFromSnakeCase`로 설정해주거나.
