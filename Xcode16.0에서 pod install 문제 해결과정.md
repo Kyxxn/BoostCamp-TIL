@@ -1,11 +1,18 @@
 ## Xcode16.0에서 pod install 안되는 이슈
 > Xcode 16.0 업데이트 이후, CocoaPods로 install하면 에러가 발생하는 이슈가 있었다.
 
-문제의 파일: `.xcodeproj/project.pbxproj`
+### 문제의 파일
+> .xcodeproj/project.pbxproj
+<img width="475" alt="스크린샷 2024-10-07 오후 11 44 18" src="https://github.com/user-attachments/assets/ce542554-3165-45cf-8ca7-428bc55f7f6e">
+
 [관련 코코아팟 이슈](https://github.com/CocoaPods/CocoaPods/issues/12583)
 
+<br>
+
 ### 문제 해결 과정
+
 문제의 파일은 해당 경로이다.
+
 
 1. `nano 프젝명.xcodeproj/project.pbxproj`을 통해 CLI에서 편집기로 열어준다.
 2. `objectVersion = 77;` -> `objectVersion = 56;`으로 변경
