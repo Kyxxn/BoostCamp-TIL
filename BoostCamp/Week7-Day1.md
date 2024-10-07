@@ -12,7 +12,14 @@
 - [Xcode16.0에서 CocoaPods install 안되는 문제 해결 기록](https://github.com/Kyxxn/TIL/blob/main/Xcode16.0%EC%97%90%EC%84%9C%20pod%20install%20%EB%AC%B8%EC%A0%9C%20%ED%95%B4%EA%B2%B0%EA%B3%BC%EC%A0%95.md)
 
 - SwiftLint 적용
-    - SandBox 에러를 겪었는데, `Build Settings - User Script Sandboxing`을 No로 설정해서 보안 이슈 만들어버림 (나중에 처리)
+    - .xcfilelist 에러
+        - 처음 에러는 `.xcfilelist`에서 겪었는데, `Secret.xcconfig`로만 설정해둬서 발생한 문제였다. 
+          ![스크린샷 2024-10-07 오후 6 22 48](https://github.com/user-attachments/assets/1204fcbc-55b1-4949-a700-07051a940d2c)
+        - 아래와 같이 `Secret.xcconfig` 하나, `Pods-IssueTracker.debug.xcconfig`하나 각각 넣어줘서 해결했다. (맞는지 모르겠음...)
+          <img width="1430" alt="스크린샷 2024-10-08 오전 12 12 03" src="https://github.com/user-attachments/assets/2a1b02c1-ddec-41f6-b6a8-3b9292ada5df">
+    - SandBox 에러
+        - <img width="671" alt="스크린샷 2024-10-08 오전 12 15 38" src="https://github.com/user-attachments/assets/6cbb8dad-c97c-4d25-aef0-c7a4f982c4b2">
+        - `Build Settings - User Script Sandboxing`을 No로 설정해서 보안 이슈 만들어버림 (나중에 처리)
     - excluded에 `Pods`를 넣어도 계속 외부 라이브러리의 lint까지 에러를 잡았는데, 이건 캐시 문제인지..? `swiftlint clear-cache` 명령을 하고 Xcode 강종하고나니 해결됐다. (억까인듯?)
 
 - TabBarCoordinator 적용
