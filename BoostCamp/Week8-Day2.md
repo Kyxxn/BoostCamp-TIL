@@ -27,3 +27,9 @@ URLSession Data / DataTask
 
 ### 레퍼런스
 - [KeyChain](https://velog.io/@tmdckd232/iOS-Keychain%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EC%9E%90)
+
+
+### TMI
+<img width="516" alt="스크린샷 2024-10-16 오전 12 50 44" src="https://github.com/user-attachments/assets/e33227fc-0641-48b3-9b0d-574164519522">
+
+오늘도 열심히 살았다.
