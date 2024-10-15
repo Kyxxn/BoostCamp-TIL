@@ -26,18 +26,7 @@
 
 4. Bundle 주입 문제
     - 오강훈 멘토님께서 Bundle에서 토큰 주입이나 URL 주입 등등을 분리해야할 필요가 있다고 말씀하심
-    - 무슨 뜻인지 몰랐으나, `Storage`계층에서 `Resource - issues.json`에 있는 JSON을 Bundle로 막 가져다 썼는데, 모듈화를 하니까 이게 안됨
-    - 의존성 주입이 필요했음
 
-### 4번 과정 설명
-<img width="264" alt="스크린샷 2024-10-15 오전 3 09 33" src="https://github.com/user-attachments/assets/280dec7d-987f-4929-b1ca-b98e2b655c61">
-<img width="268" alt="스크린샷 2024-10-15 오전 3 10 42" src="https://github.com/user-attachments/assets/706806f8-2ce0-47aa-a731-ad7ab9474c2e">
-
-- 상황: `StorageService` 내부에서 `Bundle.main.url(forResource: "issues", withExtension: "json")`를 사용한다. `issues.json`을 어디에 두는게 맞을까 ?
-- 좌측 사진처럼 프레임워크와 같은 계층이 두면 안됨
-- 우측 사진처럼 해야 Bundle 접근이 가능.
-- 근데 이렇게 하느니 `IssueTracker의 SceneDelegate`와 같은 곳에서 의존성을 주입해주는 게 맞다고 봄.
-- [위 문제를 해결하여 개선한 승완님 코드](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/pull/181/files#diff-b344ac1dd83fb6b13655429981de671153d3f387fea4e30a1a939ae1888d52b0)
 
 <br>
 
