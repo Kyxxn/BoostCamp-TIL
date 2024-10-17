@@ -177,4 +177,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 ## 레퍼런스
 - [애플 공식문서 totalCostLimit](https://developer.apple.com/documentation/foundation/nscache/1407672-totalcostlimit)
 - [메모리 이미지 캐싱 용량 결정하기](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/pull/284#issuecomment-2392562524)
-- [TTL 도입하여 디스크 캐싱 관리]((https://cultured-farmhouse-488.notion.site/117a44a4d9ab8064922fe363045b951b))
+- [TTL 도입하여 디스크 캐싱 관리](https://cultured-farmhouse-488.notion.site/117a44a4d9ab8064922fe363045b951b)
