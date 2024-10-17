@@ -82,6 +82,8 @@
 ## 메모리 이미지 캐싱 용량 결정하기
 > [레퍼런스](https://github.com/boostcampwm-2024/swift-p3-issue-tracker/pull/284#issuecomment-2392562524)
 
+<img width="869" alt="스크린샷 2024-10-18 오전 2 45 28" src="https://github.com/user-attachments/assets/118833dd-76ae-4606-8753-fa0d48a48db2">
+
 - NSCache의 용량을 결정할 때 `totalCostLimit`을 결정을 뭘로 할지 고민했다.
 	- 디폴트 값은 0이고, 0은 한도가 없다는 뜻이다. (무제한으로 받는듯)
 - 그래도 메모리가 계속 차면 앱이 죽어버릴 수 있으니까 나만의 용량 설정이 필요했는데, 멘토님의 피드백을 보았다.
@@ -173,6 +175,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 }
 ```
+
+<br>
+
+### TMI
+<img width="502" alt="스크린샷 2024-10-18 오전 1 29 57" src="https://github.com/user-attachments/assets/3a3bdb55-93dd-4c8f-b59a-31f1fb8b2892">
+
+오늘도 열심히 해따
 
 ## 레퍼런스
 - [애플 공식문서 totalCostLimit](https://developer.apple.com/documentation/foundation/nscache/1407672-totalcostlimit)
