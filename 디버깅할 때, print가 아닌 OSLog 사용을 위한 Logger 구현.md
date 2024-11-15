@@ -73,7 +73,8 @@ MHLogger는 여러 로그 레벨을 제공하며, 이를 통해 로그의 중요
 
 사용법은 간단한데, MHLogger는 제네릭으로 파라미터를 받기 때문에 String뿐만 아니라 Int, Bool, 사용자 정의 객체 등 모든 타입을 로깅할 수 있어 아래와 같이 사용될 수 있다!
 
-<이미지>
+<img width="340" alt="스크린샷 2024-11-16 오전 4 22 48" src="https://github.com/user-attachments/assets/bfde9c9f-579f-43b9-b9e6-ca11445fea16">
+
 
 print를 지양합시다 〰️ 
 
